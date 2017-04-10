@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = "shortcut icon" href = "ticcy tac.png">
+		<link rel = "stylesheet" href = "tac.css">
+		<script src = "jquery-3.0.0.min.js"></script>
+		<script src = "toe.js"></script>
+	</head>
+	<body>
+	  P1: <input type = "text" id = "p1">
+	  P2: <input type = "text" id = "p2">
+	  <button onclick = "playerSet()">Set Players</button>
+	  <br>
+	  <br>
+		<center><table>
+			<tr>
+				<td id = "tdOne" onclick="change(this);"></td>
+				<td id = "tdTwo" onclick = "change(this);"></td>
+				<td id = "tdThree" onclick = "change(this);"></td>
+			</tr>
+			<tr>
+				<td id = "tdFour" onclick = "change(this);"></td>
+				<td id = "tdFive" onclick = "change(this);"></td>
+				<td id = "tdSix" onclick = "change(this);"></td>
+			</tr>
+			<tr>
+				<td id = "tdSeven" onclick = "change(this);"></td>
+				<td id = "tdEight" onclick = "change(this);"></td>
+				<td id = "tdNine" onclick = "change(this);"></td>
+			</tr>
+		</table></center>
+		<div id = "record"></div>
+	</body>
+</html>
