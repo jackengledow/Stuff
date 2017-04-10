@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Vigenere Cracker</title>
+		<style>
+			label {
+				font-weight: bold;
+				font-family: "Roboto Condensed", sans-serif;
+				font-size: 40px;
+			}
+			input {
+				text-transform: lowercase;
+				font-family: "Roboto Condensed", sans-serif;
+				height: 30px;
+				font-size: 20px;
+			}
+			div {
+				font-size: 80px;
+				font-family: "Roboto Condensed", sans-serif;
+			}
+		</style>
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+		<link href = "table.jpg" rel = "shortcut icon">
+		<script src="../jquery-3.0.0.min.js"></script>
+		<script src="cracker.js"></script>
+	</head>
+	</body>
+		<center><label>Key:
+			<input type = "text" id = "key">
+		</label>
+		<label>Message to Encrypt:
+			<input type = "text" id = "encode">
+		</label>
+		<button onclick = "encrypt()" id = "submit">Encode</button>
+		<br><br>
+		<label>Message to Decrypt:
+			<input type = "text" id = "decode">
+		</label>
+		<button onclick = "makesense()" id = "decodation">Decode</button>
+		<div id = "real"></div>
+		<div id = "fake"></div></center>
+		<script>
+			$(document).ready(function(){
+				var t = 0;
+				var o = 0;
+				var message = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+				var object = {
+					a: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+					b: ["b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a"],
+					c: ["c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b"],
+					d: ["d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c"],
+					e: ["e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d"],
+					f: ["f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e"],
+					g: ["g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f"],
+					h: ["h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g"],
+					i: ["i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h"],
+					j: ["j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i"],
+					k: ["k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j"],
+					l: ["l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"],
+					m: ["m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"],
+					n: ["n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m"],
+					o: ["o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n"],
+					p: ["p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o"],
+					q: ["q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"],
+					r: ["r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q"],
+					s: ["s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r"],
+					t: ["t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s"],
+					u: ["u", "v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t"],
+					v: ["v", "w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u"],
+					w: ["w", "x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v"],
+					x: ["x", "y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w"],
+					y: ["y", "z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x"],
+					z: ["z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "z"],
+				}
+				$("#submit").on("click", function(){
+					var index;
+					var answer = [];
+					var key = document.getElementById("key").value;
+					var something = key.split("");
+					var encode = document.getElementById("encode").value;
+					var encoded = encode.split("");
+					while(t <= encoded.length){
+						index = message.indexOf(encoded[t]);
+						var place = something[o];
+						var letter = object[place][index];
+						answer.push(letter);
+						t++;
+						o++;
+						if(o === something.length){
+							o = 0;
+						}
+					}
+					$("real").append("<p>" + answer.join("") + "</p>");
+				});
+				$("#decodation").on("click", function(){
+					var key = document.getElementById('key').value;
+					var something = key.split("");
+					var decode = document.getElementById("decode").value;
+					var decoded = decode.split("");
+					var decryptedMessge = [];
+					while(t <= decoded.length){
+						var place2 = something[o];
+						var row = object[place2];
+						var index = row.indexOf(decoded[t]);
+						var letter = message[index];
+						decryptedMessge.push(letter);
+						t++;
+						o++;
+						if(o === something.length){
+							o = 0;
+						}
+					}
+					$("fake").append("<p>" + decryptedMessge.join("") + "</p>");
+				});
+				var i = 0;
+				$("#encode").keyup(function(event){
+					if(event.keyCode == 13){
+						$("#submit").click();
+						i++;
+					}
+				});
+				$("#decode").keyup(function(event){
+					if(event.keyCode == 13){
+						$("#decodation").click();
+						i++;
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

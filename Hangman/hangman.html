@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Hangman</title>
+		<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed:300" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style>
+			#hiddenWord > p {
+				margin-top: 10px;
+				margin-bottom: 10px;
+				font-size: 40px;
+			}
+			body {
+				font-family: 'Fira Sans Condensed', sans-serif;
+			}
+			span{
+				visibility: hidden;
+				color: black;
+			}
+			#hiddenWord > div{
+				display: inline-block;
+				width: 20px;
+			}
+			img {
+				display: inline-block;
+			}
+			#result{
+				border: 2px solid black;
+				height: 75px;
+				margin-top: 10px;
+				font-size: 30px;
+				display: inline-block;
+				padding: 5px;
+			}
+			#hiddenWord > a > button{
+				width: 100px;
+			}
+			#hiddenWord > a {
+				color: black;
+				font-size: 25px;
+			}
+			#result > p{
+				color: red;
+				margin: 7px;
+				display: inline-block;
+			}
+			#rightArm {
+				transform: rotate(120deg);
+				margin-top: 28px;
+				margin-right: 46px;
+			}
+			#leftArm {
+				transform: rotate(60deg);
+				margin-left: 67px;
+			}
+			#body {
+				transform: rotate(90deg);
+			}
+			#rightLeg {
+				transform: rotate(120deg);
+				margin-top: 109px;
+				margin-right: 73px;
+			}
+			#leftLeg {
+				transform: rotate(60deg);
+				margin-left: 74px;
+			}
+			#head {
+				margin-top: 50px;
+				height: 120px;
+			}
+			img {
+				visibility: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div class = "container-fluid">
+			<div class = "col-md-8">
+				<button onclick = "enterOne()" class = "disappear">One Player</button>
+				<button onclick = "enter()" class = "disappear">Two Players</button>
+				<div style = "margin-top: 5px;">
+					<input id = "guess" type = "text" class = "disappear" value = "Guess"><br>
+					<div id = "hiddenWord">
+					</div>
+				</div>
+			</div>
+			<div id = "result" class = "col-md-4"></div>
+			<div class = "col-md-12">
+				<center>
+					<img id = "head" src = "circle3.png" class = "5"><br>
+					<img id = "rightArm" src = "line.jpg" class = "4"><br>
+					<img id = "leftArm" src = "line.jpg" class = "3"><br>
+					<img id = "body" src = "line.jpg" class = "2"><br>
+					<img id = "rightLeg" src = "line.jpg" class = "1"><br>
+					<img id = "leftLeg" src = "line.jpg" class = "0"><br>
+				</center>
+			</div>
+		</div>
+		<script>
+			var numOfGuesses = 0;
+			var onePlayerArray = ["buffalo", "judge", "javascript", "csharp", "python", "array", "visual", "communist", "reindeer", "turtle", "rectangle"];
+			var random;
+			var onePlayer;
+			var enterOne = function(){
+				$("#guess").val("");
+				onePlayer = true;
+				var randomSelector = Math.floor(Math.random() * 10);
+				var randomWord = onePlayerArray[randomSelector];
+				random = randomWord.split("");
+				console.log(random);
+				for(g = 0; g < random.length; g++){
+					trueFalse.push(false);
+				}
+				for(i = 0; i < random.length; i++){
+					$("<div></div>").appendTo("#hiddenWord").addClass(random[i] + "" + i).css({'border-bottom': '2px solid black',
+					'margin-left': '8px', 'font-size': '20px'});
+					$('<span>' + random[i] + '</span>').appendTo("." + random[i] + "" + i).addClass("span" + random[i]);
+				}
+			}
+			var entered;
+			document.getElementById("guess").maxLength = 1;
+			var v = 5;
+			var trueFalse = [];
+			$("input").on("keydown", function (e) {
+				return e.which !== 32;
+			});
+			guess.addEventListener("keydown", function (e) {
+				if (e.keyCode === 13) {
+					if (onePlayer == true){
+						check(random);
+					}
+					else {
+						check(entered);
+					}
+				}
+			});
+			var enter = function(){
+				$("#guess").val("");
+				onePlayer = false;
+				entered = prompt("Word to Guess (no spaces):");
+				document.getElementById('hiddenWord').innerHTML = "";
+				var word = entered.split("");
+				for (k = 0; k < word.length; k++){
+					trueFalse.push(false);
+				}
+				for(i = 0; i < entered.length; i++){
+					$("<div></div>").appendTo("#hiddenWord").addClass(word[i] + "" + i).css({'border-bottom': '2px solid black',
+					'margin-left': '8px', 'font-size': '20px'});
+					$('<span>' + word[i] + '</span>').appendTo("." + word[i] + "" + i).addClass("span" + word[i]);
+				}
+			}
+			var trueFalserino = function(op){
+				if (op == true){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			var check = function(arr){
+				numOfGuesses++;
+				var u = 0;
+				var young;
+				var word = arr.join("");
+				var guess = document.getElementById("guess").value;
+				if (guess == ""){
+					alert("No guess was entered");
+					young = false;
+				}
+				else{
+					young = true;
+				}
+				if (young == true){				
+					for(o = 0; o < arr.length; o++){
+						if (arr[o] == guess){
+							trueFalse[o] = true;
+							$("span").filter(".span" + guess).css("visibility", "visible");
+						}
+						else{
+							u++;
+						}
+					}
+				}
+				if(u % arr.length == 0 && young == true){
+					$("#result").append("<p>" + guess + "</p>");
+					$("." + v).css("visibility", "visible");
+					v--;
+				}
+				if(v == -1){
+					$("#hiddenWord").html("<p>You Lost!!!</p><br><a href='hangman.html'><button>Play Again?</button></a>");
+					document.getElementById("result").innerHTML = word;
+					document.getElementById("guess").value = "";
+					document.getElementById("guess").maxLength = 0;
+					$(".disappear").css("display", "none");
+					$('#guess').bind('keypress', function(e)
+					{
+					   if(e.keyCode == 13)
+					   {
+						  return false;
+					   }
+					});
+				}
+				var q = trueFalse.every(trueFalserino);
+				if (q == true){
+					$("#hiddenWord").html("<p>You won in " + numOfGuesses + " guesses!!</p><br><a href='hangman.html'><button>Play Again?</button></a>");
+					$(".disappear").css("display", "none");
+					document.getElementById("guess").value = "";
+					document.getElementById("guess").maxLength = 0;
+				}
+			}
+		</script>
+	</body>
+</html>
