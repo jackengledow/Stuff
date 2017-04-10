@@ -5,6 +5,7 @@ var interval;
 var random;
 var randomLength;
 var scrambleArray = ["R", "R2", "R'", "L", "L2", "L'", "U", "U2", "U'", "B", "B2", "B'", "B", "D2", "D'", "F", "F2", "F'"];
+var scramble =[];
 
 $(document).on("keypress", function(e){
 	if (e.keyCode == 32){
@@ -28,7 +29,7 @@ $(document).on("keypress", function(e){
 			clearInterval(interval);
 			e.preventDefault();
 			inspect = 15;
-			$("p").html(inspect);
+			$("#timer").html(inspect);
 			doops = setInterval(decrement, 1000);
 		}
 	}
@@ -41,13 +42,18 @@ var increment = function(){
 	timeStart++;
 	$("p").html(timeStart);
 }
-var getRandom = function(){
-	random = Math.floor(Math.random() * 17);
-}
-var generateScramble(){
-	getRandom();
+var generateScramble = function(){
+   $("#scramble").html("");
+   var yus = 0;
 	randomLength = Math.floor(Math.random() * 20);
 	if (randomLength < 15){
 		randomLength = 15;
-	}	
+	}
+	while(yus <= randomLength){
+	   random = Math.floor(Math.random() * 17);
+	   scramble.push(scrambleArray[random]);
+	   var final = scramble.join(" ");
+	   $("#scramble").html(final);
+	   yus++;
+	}
 }
