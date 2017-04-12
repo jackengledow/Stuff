@@ -8,13 +8,17 @@
          #scramble > p {
             display: inline-block;
          }
+         #time-list > p{
+            display: inline-block;
+            margin-right: 8px;
+         }
       </style>
    </head>
    <body onload = "generateScramble()">
 		<h1>Timer</h1>
 		<div style = "font-size: 20px;" id = "scramble">Scramble</div>
-		<p style = "font-size: 70px" id = "timer">Ready?</p>
-		<div id = "time-list"></div>
+		<p style = "font-size: 70px; display: inline-block; width: 50%;" id = "timer">Ready?</p>
+		<div id = "time-list" style = "display: inline-block; text-align: right; overflow-y: auto; overflow-x: hidden; width: 40%; height: 80px"></div>
 		<div id = "avg">
 		   <p id = "avg5"></p>
 		   <p id = "avg12"></p>

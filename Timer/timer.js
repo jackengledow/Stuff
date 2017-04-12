@@ -8,7 +8,6 @@ var timeList = [];
 var randomLength;
 var scrambleArray = ["R ", "R2", "R'", "L ", "L2", "L'", "U ", "U2", "U'", "B ", "B2", "B'", "D ", "D2", "D'", "F ", "F2", "F'"];
 var scramble =[];
-var arr = [];
 
 $(document).on("keypress", function(e){
 	if (e.keyCode == 32){
@@ -28,8 +27,13 @@ $(document).on("keypress", function(e){
 			$("#scramble").empty();
          var time = Number(document.getElementById("timer").innerHTML);
          timeList.push(time);
-         $("#time-list").append("<p>" + poods + ": " + time + "</p>");
-         avg5();
+         $("#time-list").append("<p id = " + poods + ">" + poods + ": " + time + "</p>");
+         /*if($("#time-list").css("width") % 675 >= 0){
+            console.log(ran)
+            $("#" + poods - 1).after("br");
+         }*/
+         avgAny(5);
+         avgAny(12);
          generateScramble();
 		}
 		else{
@@ -92,12 +96,14 @@ var generateScramble = function(){
 	$("#scramble").html(final);
 }
 
-var avg5 = function(){
+var avgAny = function(size){
    var max = 0;
+   var arr = [];
    var min = 100;
    var total = 0;
-   if(timeList.length > 4){
-      arr = timeList.slice(-5);
+   if(timeList.length >= size){
+      arr = timeList.slice(-size);
+      console.log(arr);
    }
    max = Math.max(...arr);
    min = Math.min.apply(Math, arr);
@@ -106,9 +112,15 @@ var avg5 = function(){
          total = total + arr[i];
       }
    }
-   console.log(total);
-   var avg5 = total/3;
-   if (avg5 > 0){
-      $("#avg5").html(avg5.toFixed(2));
+   var avg = total/(size - 2);
+   if(size == 5){
+      if (avg > 0){
+         $("#avg5").html("Average of 5: " + avg.toFixed(2));
+      }
+   }
+   else if (size == 12){
+      if (avg > 0){
+         $("#avg12").html("Average of 12: " + avg.toFixed(2));
+      }
    }
 }
