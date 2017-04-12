@@ -7,8 +7,12 @@ var random;
 var timeList = [];
 var randomLength;
 var scrambleArray = ["R ", "R2", "R'", "L ", "L2", "L'", "U ", "U2", "U'", "B ", "B2", "B'", "D ", "D2", "D'", "F ", "F2", "F'"];
-var scramble =[];
+var scramble = [];
 var yaboy;
+var numSolves = [];
+var avg5Array = [null, null, null, null];
+var avg12Array = [null, null, null, null, null, null, null, null, null, null, null];
+var body = document.getElementById("body");
 
 $(document).on("keypress", function(e){
 	if (e.keyCode == 32){
@@ -30,8 +34,21 @@ $(document).on("keypress", function(e){
          timeList.push(time);
          $("#time-list").append("<p id = " + poods + ">" + "<span>" + poods + "</span>: " + time + "</p>");
          avgAny(5);
-		 avgAny(12);
+         avgAny(12);
          generateScramble();
+         var data = {
+            labels: numSolves,
+            series: [
+               timeList,
+               avg5Array,
+               avg12Array
+            ]
+         };
+         var options = {
+            height: 300,
+            lineSmooth: false
+         }
+         new Chartist.Line("#dataStuff", data, options);
 		}
 		else{
 			space = 2;
@@ -54,13 +71,14 @@ var decrement = function(){
 	else{
 	   $("#timer").html(inspect);
 	}
-}
+};
 var increment = function(){
 	timeStart++;
 	$("#timer").html(timeStart);
-}
+};
 var generateScramble = function(){
    poods++;
+   numSolves.push(poods);
    var final;
    scramble = [];
    var yus = 0;
@@ -91,7 +109,7 @@ var generateScramble = function(){
 	   yus++;
 	}
 	$("#scramble").html(final);
-}
+};
 
 var avgAny = function(size){
    var max = 0;
@@ -112,16 +130,17 @@ var avgAny = function(size){
    if(size == 5){
       if (avg > 0){
          $("#avg5").html("Average of 5: " + avg.toFixed(2));
+         avg5Array.push(avg);
       }
    }
    else if (size == 12){
       if (avg > 0){
          $("#avg12").html("Average of 12: " + avg.toFixed(2));
+         avg12Array.push(avg);
       }
    }
    yaboy = document.getElementById("time-list");
-   console.log(yaboy.scrollHeight, yaboy.clientHeight, yaboy.scrollTop);
    if(yaboy.scrollHeight - yaboy.clientHeight >= yaboy.scrollTop){
 	   yaboy.scrollTop = yaboy.scrollHeight - yaboy.clientHeight;
    }
-}
+};

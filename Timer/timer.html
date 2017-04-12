@@ -3,6 +3,8 @@
    <head>
       <title>Cube Timer</title>
       <script src = "../jquery-3.0.0.min.js"></script>
+      <link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+      <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
       <script src = "timer.js"></script>
       <style>
          #scramble > p {
@@ -12,13 +14,37 @@
             display: inline-block;
             margin-right: 8px;
          }
-		 span{
-			font-weight: bold;
-			font-size:  20px;
-		 }
+         span{
+			   font-weight: bold;
+			   font-size:  20px;
+         }
+         .ct-series-a .ct-line {
+            stroke: red;
+            stroke-width: 2px;
+         }
+         .ct-series-b .ct-line {
+            stroke: blue;
+            stroke-width: 2px;
+         }
+         .ct-series-c .ct-line {
+            stroke: black;
+            stroke-width: 2px;
+         }
+         .ct-series-a .ct-point {
+            stroke: red;
+            stroke-width: 7px;
+         }
+         .ct-series-b .ct-point {
+            stroke: blue;
+            stroke-width: 7px;
+         }
+         .ct-series-c .ct-point {
+            stroke: black;
+            stroke-width: 7px;
+         }
       </style>
    </head>
-   <body onload = "generateScramble()">
+   <body onload = "generateScramble()" id = "body">
 		<h1>Timer</h1>
 		<div style = "font-size: 20px;" id = "scramble">Scramble</div>
 		<p style = "font-size: 70px; display: inline-block; width: 50%;" id = "timer">Ready?</p>
@@ -27,6 +53,6 @@
 		   <p id = "avg5"></p>
 		   <p id = "avg12"></p>
 		</div>
-		<div id = "dataStuff"></div>
+		<div id = "dataStuff" class = "ct-chart"></div>
    </body>
 </html>
