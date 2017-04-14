@@ -9,11 +9,13 @@ var randomLength;
 var scrambleArray = ["R ", "R2", "R'", "L ", "L2", "L'", "U ", "U2", "U'", "B ", "B2", "B'", "D ", "D2", "D'", "F ", "F2", "F'"];
 var scramble = [];
 var yaboy;
+var yas;
 var numSolves = [];
 var avg5Array = [null, null, null, null];
 var avg12Array = [null, null, null, null, null, null, null, null, null, null, null];
 var body = document.getElementById("body");
 var avgOverall = [null, null];
+var booyah = $("body");
 
 $(document).on("keypress", function(e){
 	if (e.keyCode == 32){
@@ -31,33 +33,74 @@ $(document).on("keypress", function(e){
 			clearInterval(interval);
 			space++;
 			$("#scramble").empty();
-         var time = Number(document.getElementById("timer").innerHTML);
-         timeList.push(time);
-         var yas = poods + 1;
-         $("#time-list").append("<p id = " + yas + ">" + "<span>" + yas + "</span>: " + time + "</p>");
-         poods++;
-         numSolves.push(poods);
-         if(poods != 5){
-            avgAny(5);
-         }
-         if(poods != 12){
-            avgAny(12);
-         }
-         avgAny(poods);
-         var data = {
-            labels: numSolves,
-            series: [
+        var time = Number(document.getElementById("timer").innerHTML);
+        timeList.push(time);
+		yas = poods + 1;
+        $("#time-list").append("<p id = " + yas + ">" + "<span>" + yas + "</span>: " + time + "</p>");
+        poods++;
+        numSolves.push(poods);
+        if(poods != 5){
+			avgAny(5);
+        }
+        if(poods != 12){
+			avgAny(12);
+        }
+        avgAny(poods);
+        var graphs = {
+			labels: numSolves,
+            series: [{
+				name: "average",
+				data: timeList
+			},
                timeList,
                avgOverall,
                avg5Array,
                avg12Array
             ]
-         };
+        };
          var options = {
             height: 300,
-            lineSmooth: false
+            lineSmooth: false,
+			showPoint: false
          };
-         new Chartist.Line("#dataStuff", data, options);
+		 var chart = new Chartist.Line('.ct-chart', {
+			  labels: numSolves,
+			  series: [{
+				name: 'time',
+				data: timeList
+			  }, {
+				name: 'avgOverall',
+				data: avgOverall
+			  }, {
+				name: 'avg5',
+				data: avg5Array
+			  }, {
+				name: 'avg12',
+				data: avg12Array
+			  }]
+			},
+			{
+			height: 300,
+			series: {
+				'time': {
+					showPoint: true,
+					lineSmooth: false
+				}, 
+				'avgOverall': {
+					showPoint: false,
+					lineSmooth: false
+				},
+				'avg5': {
+					showPoint: false,
+					lineSmooth: false
+				},
+				'avg12': {
+					showPoint: false,
+					lineSmooth: false
+				}
+			  }
+			});
+		 $("window").scrollTop(0);
          generateScramble();
 		}
 		else{
@@ -70,6 +113,30 @@ $(document).on("keypress", function(e){
 		}
 	}
 });
+var remove = function(){
+	timeList.pop();
+	avg5Array.pop();
+	avg12Array.pop();
+	avgOverall.pop();
+	$("#" + yas).remove();
+	yas--;
+	poods--;
+	var data = {
+		labels: numSolves,
+		series: [
+			timeList,
+			avgOverall,
+			avg5Array,
+			avg12Array
+		]
+	};
+	var options = {
+		height: 300,
+		lineSmooth: false,
+		showPoint: false
+	};
+	new Chartist.Line("#dataStuff", data, options);
+}
 var decrement = function(){
 	inspect--;
 	if (inspect < 0 && inspect >= -2){
@@ -118,7 +185,9 @@ var generateScramble = function(){
 	}
 	$("#scramble").html(final);
 };
-
+//window.onscroll = function () {
+	//window.scrollTo(0,0);
+//}
 var avgAny = function(size){
    var max = 0;
    var arr = [];

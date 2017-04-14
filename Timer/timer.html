@@ -14,43 +14,30 @@
             display: inline-block;
             margin-right: 8px;
          }
-         span{
-			   font-weight: bold;
-			   font-size:  20px;
-         }
-         .ct-series-a .ct-line {
-            stroke: red;
-            stroke-width: 2px;
-         }
-         .ct-series-b .ct-line {
+        span{
+			font-weight: bold;
+			font-size:  20px;
+        }
+        .ct-series-a .ct-line {
+			stroke: red;
+			stroke-width: 2px;
+        }
+		.ct-series-a .ct-point {
+			stroke: red;
+			stroke-width: 5px;
+		}
+        .ct-series-b .ct-line {
             stroke: blue;
             stroke-width: 2px;
-         }
-         .ct-series-c .ct-line {
+        }
+        .ct-series-c .ct-line {
             stroke: black;
             stroke-width: 2px;
-         }
-         .ct-series-a .ct-point {
-            stroke: red;
-            stroke-width: 7px;
-         }
-         .ct-series-b .ct-point {
-            stroke: blue;
-            stroke-width: 7px;
-         }
-         .ct-series-c .ct-point {
-            stroke: black;
-            stroke-width: 7px;
-         }
-         .ct-series-d .ct-line {
-            stroke-dasharray: 5px;
-            stroke: yellow;
+        }
+        .ct-series-d .ct-line {
+            stroke: green;
             stroke-width: 2px;
-         }
-         .ct-series-d .ct-point {
-            stroke: yellow;
-            stroke-width: 7px;
-         }
+        }
       </style>
    </head>
    <body onload = "generateScramble()" id = "body">
@@ -62,6 +49,7 @@
 		   <p id = "avgAll">Average: </p>
 		   <p id = "avg5">Average of 5: </p>
 		   <p id = "avg12">Average of 12: </p>
+		   <button onclick = "remove()">Delete Last Solve</button>
 		</div>
 		<div id = "dataStuff" class = "ct-chart"></div>
    </body>
