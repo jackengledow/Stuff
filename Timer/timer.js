@@ -13,6 +13,7 @@ var numSolves = [];
 var avg5Array = [null, null, null, null];
 var avg12Array = [null, null, null, null, null, null, null, null, null, null, null];
 var body = document.getElementById("body");
+var avgOverall = [null, null];
 
 $(document).on("keypress", function(e){
 	if (e.keyCode == 32){
@@ -32,14 +33,22 @@ $(document).on("keypress", function(e){
 			$("#scramble").empty();
          var time = Number(document.getElementById("timer").innerHTML);
          timeList.push(time);
-         $("#time-list").append("<p id = " + poods + ">" + "<span>" + poods + "</span>: " + time + "</p>");
-         avgAny(5);
-         avgAny(12);
-         generateScramble();
+         var yas = poods + 1;
+         $("#time-list").append("<p id = " + yas + ">" + "<span>" + yas + "</span>: " + time + "</p>");
+         poods++;
+         numSolves.push(poods);
+         if(poods != 5){
+            avgAny(5);
+         }
+         if(poods != 12){
+            avgAny(12);
+         }
+         avgAny(poods);
          var data = {
             labels: numSolves,
             series: [
                timeList,
+               avgOverall,
                avg5Array,
                avg12Array
             ]
@@ -47,8 +56,9 @@ $(document).on("keypress", function(e){
          var options = {
             height: 300,
             lineSmooth: false
-         }
+         };
          new Chartist.Line("#dataStuff", data, options);
+         generateScramble();
 		}
 		else{
 			space = 2;
@@ -77,8 +87,6 @@ var increment = function(){
 	$("#timer").html(timeStart);
 };
 var generateScramble = function(){
-   poods++;
-   numSolves.push(poods);
    var final;
    scramble = [];
    var yus = 0;
@@ -127,17 +135,18 @@ var avgAny = function(size){
       }
    }
    var avg = total/(size - 2);
-   if(size == 5){
-      if (avg > 0){
-         $("#avg5").html("Average of 5: " + avg.toFixed(2));
-         avg5Array.push(avg);
-      }
+   if(numSolves.length >= 3 && size == poods){
+      $("#avgAll").html("Average: " + avg.toFixed(2));
+      avgOverall.push(avg);
    }
-   else if (size == 12){
-      if (avg > 0){
-         $("#avg12").html("Average of 12: " + avg.toFixed(2));
-         avg12Array.push(avg);
-      }
+   if(numSolves.length >= 5 && size == 5){
+      $("#avg5").html("Average of 5: " + avg.toFixed(2));
+      avg5Array.push(avg);
+   }
+   if(numSolves.length >= 12 && size == 12){
+      $("#avg12").html("Average of 12: " + avg.toFixed(2));
+      avg12Array.push(avg);
+      console.log(avg12Array);
    }
    yaboy = document.getElementById("time-list");
    if(yaboy.scrollHeight - yaboy.clientHeight >= yaboy.scrollTop){

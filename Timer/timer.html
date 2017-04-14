@@ -42,16 +42,26 @@
             stroke: black;
             stroke-width: 7px;
          }
+         .ct-series-d .ct-line {
+            stroke-dasharray: 5px;
+            stroke: yellow;
+            stroke-width: 2px;
+         }
+         .ct-series-d .ct-point {
+            stroke: yellow;
+            stroke-width: 7px;
+         }
       </style>
    </head>
    <body onload = "generateScramble()" id = "body">
 		<h1>Timer</h1>
 		<div style = "font-size: 20px;" id = "scramble">Scramble</div>
-		<p style = "font-size: 70px; display: inline-block; width: 50%;" id = "timer">Ready?</p>
+		<p style = "font-size: 70px; display: inline-block; width: 50%; margin: 0px;" id = "timer">Ready?</p>
 		<div id = "time-list" style = "display: inline-block; text-align: right; overflow-y: auto; overflow-x: hidden; width: 40%; height: 200px;"></div>
 		<div id = "avg">
-		   <p id = "avg5"></p>
-		   <p id = "avg12"></p>
+		   <p id = "avgAll">Average: </p>
+		   <p id = "avg5">Average of 5: </p>
+		   <p id = "avg12">Average of 12: </p>
 		</div>
 		<div id = "dataStuff" class = "ct-chart"></div>
    </body>
