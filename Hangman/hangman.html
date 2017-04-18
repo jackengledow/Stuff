@@ -22,6 +22,7 @@
 			#hiddenWord > div{
 				display: inline-block;
 				width: 20px;
+				text-align: center;
 			}
 			img {
 				display: inline-block;
@@ -164,7 +165,14 @@
 				numOfGuesses++;
 				var u = 0;
 				var young;
-				var word = arr.join("");
+				if (typeof arr == "object"){
+					var word = arr.join("");
+				}
+				else {
+					var arr2 = arr.split("");
+					var word = arr2.join("");
+				}
+				console.log(typeof arr);
 				var guess = document.getElementById("guess").value;
 				if (guess == ""){
 					alert("No guess was entered");
