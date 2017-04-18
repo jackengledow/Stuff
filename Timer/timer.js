@@ -113,30 +113,57 @@ $(document).on("keypress", function(e){
 		}
 	}
 });
-var remove = function(){
-	timeList.pop();
-	avg5Array.pop();
-	avg12Array.pop();
-	avgOverall.pop();
-	$("#" + yas).remove();
-	yas--;
-	poods--;
-	var data = {
-		labels: numSolves,
-		series: [
-			timeList,
-			avgOverall,
-			avg5Array,
-			avg12Array
-		]
-	};
-	var options = {
+$(document).ready(function(){
+	$("#button").one("click", function(){
+		console.log("ran");
+		timeList.pop();
+		avg5Array.pop();
+		avg12Array.pop();
+		avgOverall.pop();
+		numSolves.pop();
+		$("#" + yas).remove();
+		if(poods != 0){
+			poods--;
+		}
+	 var chart = new Chartist.Line('.ct-chart', {
+		  labels: numSolves,
+		  series: [{
+			name: 'time',
+			data: timeList
+		  }, {
+			name: 'avgOverall',
+			data: avgOverall
+		  }, {
+			name: 'avg5',
+			data: avg5Array
+		  }, {
+			name: 'avg12',
+			data: avg12Array
+		  }]
+		},
+		{
 		height: 300,
-		lineSmooth: false,
-		showPoint: false
-	};
-	new Chartist.Line("#dataStuff", data, options);
-}
+		series: {
+			'time': {
+				showPoint: true,
+				lineSmooth: false
+			}, 
+			'avgOverall': {
+				showPoint: false,
+				lineSmooth: false
+			},
+			'avg5': {
+				showPoint: false,
+				lineSmooth: false
+			},
+			'avg12': {
+				showPoint: false,
+				lineSmooth: false
+			}
+		  }
+		});
+	});
+});
 var decrement = function(){
 	inspect--;
 	if (inspect < 0 && inspect >= -2){
