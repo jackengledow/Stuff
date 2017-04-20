@@ -26,6 +26,9 @@
 			}
 			img {
 				display: inline-block;
+				visibility: hidden;
+				z-index: 2;
+				position: relative;
 			}
 			#result{
 				border: 2px solid black;
@@ -49,48 +52,51 @@
 			}
 			#rightArm {
 				transform: rotate(120deg);
-				margin-top: 28px;
-				margin-right: 46px;
+				top: -260px;
+				left: -40px;
 			}
 			#leftArm {
 				transform: rotate(60deg);
-				margin-left: 67px;
+				top: -282px;
+				left: 35px;
 			}
 			#body {
 				transform: rotate(90deg);
+				top: -290px;
+				left: -2.5px;
 			}
 			#rightLeg {
 				transform: rotate(120deg);
-				margin-top: 109px;
-				margin-right: 73px;
+				top: -173px;
+				left: -39px;
 			}
 			#leftLeg {
 				transform: rotate(60deg);
-				margin-left: 74px;
+				top: -193px;
+				left: 35px;
 			}
 			#head {
-				margin-top: 50px;
 				height: 120px;
-			}
-			img {
-				visibility: hidden;
+				top: -127px;
+				left: -178px;
 			}
 		</style>
 	</head>
 	<body>
 		<div class = "container-fluid">
-			<div class = "col-md-8">
+			<div class = "col-md-8" style = "margin-top: 10px;">
 				<button onclick = "enterOne()" class = "disappear">One Player</button>
 				<button onclick = "enter()" class = "disappear">Two Players</button>
 				<div style = "margin-top: 5px;">
 					<input id = "guess" type = "text" class = "disappear" value = "Guess"><br>
-					<div id = "hiddenWord">
+					<div id = "hiddenWord" style = "height: 30px">
 					</div>
 				</div>
 			</div>
 			<div id = "result" class = "col-md-4"></div>
 			<div class = "col-md-12">
 				<center>
+					<img id = "gallows" src = "gallows6.png" style = "visibility: visible; z-index: 1; transform: scaleX(-1); height: 490px; width: 343.156px;">
 					<img id = "head" src = "circle3.png" class = "5"><br>
 					<img id = "rightArm" src = "line.jpg" class = "4"><br>
 					<img id = "leftArm" src = "line.jpg" class = "3"><br>
@@ -202,6 +208,7 @@
 					document.getElementById("result").innerHTML = word;
 					document.getElementById("guess").value = "";
 					document.getElementById("guess").maxLength = 0;
+					$("#head").attr("src", "dead man.png");
 					$(".disappear").css("display", "none");
 					$('#guess').bind('keypress', function(e)
 					{
