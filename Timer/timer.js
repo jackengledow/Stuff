@@ -85,7 +85,7 @@ $(document).on("keypress", function(e){
 				'time': {
 					showPoint: true,
 					lineSmooth: false
-				}, 
+				},
 				'avgOverall': {
 					showPoint: false,
 					lineSmooth: false
@@ -122,7 +122,7 @@ $(document).ready(function(){
 		avgOverall.pop();
 		numSolves.pop();
 		$("#" + yas).remove();
-		if(poods != 0){
+		if(poods !== 0){
 			poods--;
 		}
 	 var chart = new Chartist.Line('.ct-chart', {
@@ -147,7 +147,7 @@ $(document).ready(function(){
 			'time': {
 				showPoint: true,
 				lineSmooth: false
-			}, 
+			},
 			'avgOverall': {
 				showPoint: false,
 				lineSmooth: false
