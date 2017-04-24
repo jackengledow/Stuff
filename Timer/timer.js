@@ -16,6 +16,9 @@ var avg12Array = [null, null, null, null, null, null, null, null, null, null, nu
 var body = document.getElementById("body");
 var avgOverall = [null, null];
 var booyah = $("body");
+var best;
+var realAvg5Array = [];
+var realAvg12Array = [];
 
 $(document).on("keypress", function(e){
 	if (e.keyCode == 32){
@@ -212,19 +215,15 @@ var generateScramble = function(){
 	}
 	$("#scramble").html(final);
 };
-//window.onscroll = function () {
-	//window.scrollTo(0,0);
-//}
 var avgAny = function(size){
    var max = 0;
    var arr = [];
-   var min = 100;
    var total = 0;
    if(timeList.length >= size){
       arr = timeList.slice(-size);
    }
    max = Math.max(...arr);
-   min = Math.min.apply(Math, arr);
+   var min = Math.min.apply(Math, arr);
    for(i = 0; i < arr.length; i++){
       if(arr[i] != max && arr[i] != min){
          total = total + arr[i];
@@ -234,18 +233,27 @@ var avgAny = function(size){
    if(numSolves.length >= 3 && size == poods){
       $("#avgAll").html("Average: " + avg.toFixed(2));
       avgOverall.push(avg);
+	  $("#fast").html("Best Time: " + min.toFixed(2));
    }
    if(numSolves.length >= 5 && size == 5){
       $("#avg5").html("Average of 5: " + avg.toFixed(2));
       avg5Array.push(avg);
+	  realAvg5Array.push(avg);
+	  fastest(realAvg5Array);
+	  $("#fast5").html("Best average of 5: " + best.toFixed(2));
    }
    if(numSolves.length >= 12 && size == 12){
       $("#avg12").html("Average of 12: " + avg.toFixed(2));
       avg12Array.push(avg);
-      console.log(avg12Array);
+	  realAvg12Array.push(avg);
+	  fastest(realAvg12Array);
+	  $("#fast12").html("Best average of 12: " + best.toFixed(2));
    }
    yaboy = document.getElementById("time-list");
    if(yaboy.scrollHeight - yaboy.clientHeight >= yaboy.scrollTop){
 	   yaboy.scrollTop = yaboy.scrollHeight - yaboy.clientHeight;
    }
 };
+var fastest = function(arr){
+	best = Math.min.apply(Math, arr);
+}

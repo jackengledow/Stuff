@@ -80,6 +80,9 @@
 				top: -127px;
 				left: -178px;
 			}
+			#hangmanDiv{
+				pointer-events: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -94,7 +97,7 @@
 				</div>
 			</div>
 			<div id = "result" class = "col-md-4"></div>
-			<div class = "col-md-12">
+			<div class = "col-md-12" id = "hangmanDiv">
 				<center>
 					<img id = "gallows" src = "gallows6.png" style = "visibility: visible; z-index: 1; transform: scaleX(-1); height: 490px; width: 343.156px;">
 					<img id = "head" src = "circle3.png" class = "5"><br>
@@ -220,7 +223,7 @@
 				}
 				var q = trueFalse.every(trueFalserino);
 				if (q == true){
-					$("#hiddenWord").html("<p>You won in " + numOfGuesses + " guesses!!</p><br><a href='hangman.html'><button>Play Again?</button></a>");
+					$("#hiddenWord").html("<p>You won in " + numOfGuesses + " guesses!!</p><br><a href='hangman.html' id = 'button'><button>Play Again?</button></a>");
 					$(".disappear").css("display", "none");
 					document.getElementById("guess").value = "";
 					document.getElementById("guess").maxLength = 0;
