@@ -83,7 +83,7 @@ $(document).on("keypress", function(e){
 			  }]
 			},
 			{
-			height: 300,
+			height: 270,
 			series: {
 				'time': {
 					showPoint: true,
@@ -117,7 +117,7 @@ $(document).on("keypress", function(e){
 	}
 });
 $(document).ready(function(){
-	$("#button").one("click", function(){
+	$("#button").on("click", function(){
 		console.log("ran");
 		timeList.pop();
 		avg5Array.pop();
@@ -184,7 +184,7 @@ var increment = function(){
 	$("#timer").html(timeStart);
 };
 var generateScramble = function(){
-   var final;
+   var end;
    scramble = [];
    var yus = 0;
 	randomLength = Math.floor(Math.random() * 30);
@@ -210,10 +210,26 @@ var generateScramble = function(){
 	         }
 	      }
 	   }
-	   final = scramble.join(" ");
+	   if (yus > 1){
+		   if(scramble[yus][0] == scramble[yus - 2][0]){
+			   var random2 = Math.floor(Math.random() * 16);
+			   if(scramble[yus-2][0] != scrambleArray[random2][0] && scramble[yus-1][0] != scrambleArray[random2][0]){
+				   scramble[yus] = scrambleArray[random2];
+			   }
+	         else{
+	            if(random2 > 13){
+	               scramble[yus] = scrambleArray[random2 - 4];
+	            }
+	            else{
+	               scramble[yus] = scrambleArray[random2 + 4];
+	            }
+	         }
+		   }
+	   }
+	   end = scramble.join(" ");
 	   yus++;
 	}
-	$("#scramble").html(final);
+	$("#scramble").html(end);
 };
 var avgAny = function(size){
    var max = 0;
