@@ -39,7 +39,7 @@ $(document).on("keypress", function(e){
         var time = Number(document.getElementById("timer").innerHTML);
         timeList.push(time);
 		yas = poods + 1;
-        $("#time-list").append("<p id = " + yas + ">" + "<span>" + yas + "</span>: " + time + "</p>");
+        $("#time-list").append("<p id = " + yas + " class = 'timeListTime'>" + "<span>" + yas + "</span>: " + time + "</p>");
         poods++;
         numSolves.push(poods);
         if(poods != 5){
@@ -117,7 +117,12 @@ $(document).on("keypress", function(e){
 	}
 });
 $(document).ready(function(){
-	$("#button").on("click", function(){
+     $("#time-list").on("click", ".timeListTime", function(){
+          if (confirm("delete this?")){
+               console.log("issa yaboy");
+          }
+     });
+	/*$("#button").on("click", function(){
 		console.log("ran");
 		timeList.pop();
 		avg5Array.pop();
@@ -165,7 +170,7 @@ $(document).ready(function(){
 			}
 		  }
 		});
-	});
+	});*/
 });
 var decrement = function(){
 	inspect--;
@@ -212,16 +217,16 @@ var generateScramble = function(){
 	   }
 	   if (yus > 1){
 		   if(scramble[yus][0] == scramble[yus - 2][0]){
-			   var random2 = Math.floor(Math.random() * 16);
-			   if(scramble[yus-2][0] != scrambleArray[random2][0] && scramble[yus-1][0] != scrambleArray[random2][0]){
-				   scramble[yus] = scrambleArray[random2];
+			   var random3 = Math.floor(Math.random() * 16);
+			   if(scramble[yus - 2][0] != scrambleArray[random3][0] && scramble[yus - 1][0] != scrambleArray[random3][0]){
+				   scramble[yus] = scrambleArray[random3];
 			   }
 	         else{
 	            if(random2 > 13){
-	               scramble[yus] = scrambleArray[random2 - 4];
+	               scramble[yus] = scrambleArray[random3 - 4];
 	            }
 	            else{
-	               scramble[yus] = scrambleArray[random2 + 4];
+	               scramble[yus] = scrambleArray[random3 + 4];
 	            }
 	         }
 		   }
