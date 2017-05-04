@@ -1,0 +1,13 @@
+table {
+	width: 700px;
+	height: 600px;
+}
+td {
+	border: 2px solid black;
+}
+.red {
+   background-color: red;
+}
+.yellow {
+   background-color: yellow;
+}
