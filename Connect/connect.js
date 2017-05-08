@@ -10,6 +10,9 @@ var columnObj = {
 };
 var id;
 
+String.prototype.capitalize = function() {
+   return this.charAt(0).toUpperCase() + this.slice(1);
+}
 $(document).ready( function(){
    $("td").on("click", function(){
       var column = $(this).attr("class");
@@ -92,98 +95,152 @@ $(document).ready( function(){
                console.log("sucks");
          }
       }
-      check();
       clickCount++;
+      check();
    });
    var check = function(){
       var color = $("#" + id).attr('name');
-      switch(parseInt(id)){
-         case 11:
-            break;
-         case 12:
-            break;
-         case 13:
-            break;
-         case 14:
-            break;
-         case 15:
-            break;
-         case 16:
-            break;
-         case 21:
-            break;
-         case 22:
-            break;
-         case 23:
-            break;
-         case 24:
-            break;
-         case 25:
-            break;
-         case 36:
-            break;
-         case 31:
-            break;
-         case 32:
-            break;
-         case 33:
-            break;
-         case 34:
-            break;
-         case 35:
-            break;
-         case 36:
-            break;
-         case 41:
-            break;
-         case 42:
-            break;
-         case 43:
-            break;
-         case 44:
-            break;
-         case 45:
-            break;
-         case 46:
-            break;
-         case 51:
-            break;
-         case 52:
-            break;
-         case 53:
-            break;
-         case 54:
-            break;
-         case 55:
-            break;
-         case 56:
-            break;
-         case 61:
-            break;
-         case 62:
-            break;
-         case 63:
-            break;
-         case 64:
-            break;
-         case 65:
-            break;
-         case 66:
-            break;
-         case 71:
-            break;
-         case 72:
-            break;
-         case 73:
-            break;
-         case 74:
-            break;
-         case 75:
-            break;
-         case 76:
-            break;
-         default:
-            console.log("sucks");
+      // Column/Row One
+      if($("#11").attr("name") == color && $("#21").attr("name") == color && $("#31").attr("name") == color && $("#41").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
       }
-   }
+      if($("#51").attr("name") == color && $("#21").attr("name") == color && $("#31").attr("name") == color && $("#41").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#51").attr("name") == color && $("#61").attr("name") == color && $("#31").attr("name") == color && $("#41").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#51").attr("name") == color && $("#61").attr("name") == color && $("#71").attr("name") == color && $("#41").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#11").attr("name") == color && $("#12").attr("name") == color && $("#13").attr("name") == color && $("#14").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#12").attr("name") == color && $("#13").attr("name") == color && $("#14").attr("name") == color && $("#15").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#13").attr("name") == color && $("#14").attr("name") == color && $("#15").attr("name") == color && $("#16").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      //Column/Row Two
+      if($("#12").attr("name") == color && $("#22").attr("name") == color && $("#32").attr("name") == color && $("#42").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#52").attr("name") == color && $("#22").attr("name") == color && $("#32").attr("name") == color && $("#42").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#52").attr("name") == color && $("#62").attr("name") == color && $("#32").attr("name") == color && $("#42").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#52").attr("name") == color && $("#62").attr("name") == color && $("#72").attr("name") == color && $("#42").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#21").attr("name") == color && $("#22").attr("name") == color && $("#23").attr("name") == color && $("#24").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#22").attr("name") == color && $("#23").attr("name") == color && $("#24").attr("name") == color && $("#25").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#23").attr("name") == color && $("#24").attr("name") == color && $("#25").attr("name") == color && $("#26").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      //Column/Row 3
+      if($("#13").attr("name") == color && $("#23").attr("name") == color && $("#33").attr("name") == color && $("#43").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#53").attr("name") == color && $("#23").attr("name") == color && $("#33").attr("name") == color && $("#43").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#53").attr("name") == color && $("#63").attr("name") == color && $("#33").attr("name") == color && $("#43").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#53").attr("name") == color && $("#63").attr("name") == color && $("#73").attr("name") == color && $("#43").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#31").attr("name") == color && $("#32").attr("name") == color && $("#33").attr("name") == color && $("#34").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#32").attr("name") == color && $("#33").attr("name") == color && $("#34").attr("name") == color && $("#35").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#33").attr("name") == color && $("#34").attr("name") == color && $("#35").attr("name") == color && $("#36").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      //Column/Row 4
+      if($("#14").attr("name") == color && $("#24").attr("name") == color && $("#34").attr("name") == color && $("#44").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#54").attr("name") == color && $("#24").attr("name") == color && $("#34").attr("name") == color && $("#44").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#54").attr("name") == color && $("#64").attr("name") == color && $("#34").attr("name") == color && $("#44").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#54").attr("name") == color && $("#64").attr("name") == color && $("#74").attr("name") == color && $("#44").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#41").attr("name") == color && $("#42").attr("name") == color && $("#43").attr("name") == color && $("#44").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#42").attr("name") == color && $("#43").attr("name") == color && $("#44").attr("name") == color && $("#45").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#43").attr("name") == color && $("#44").attr("name") == color && $("#45").attr("name") == color && $("#46").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      //Column/Row 5
+      if($("#15").attr("name") == color && $("#25").attr("name") == color && $("#35").attr("name") == color && $("#45").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#55").attr("name") == color && $("#25").attr("name") == color && $("#35").attr("name") == color && $("#45").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#55").attr("name") == color && $("#65").attr("name") == color && $("#35").attr("name") == color && $("#45").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#55").attr("name") == color && $("#65").attr("name") == color && $("#75").attr("name") == color && $("#45").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#51").attr("name") == color && $("#52").attr("name") == color && $("#53").attr("name") == color && $("#54").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#52").attr("name") == color && $("#53").attr("name") == color && $("#54").attr("name") == color && $("#55").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#53").attr("name") == color && $("#54").attr("name") == color && $("#55").attr("name") == color && $("#56").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      //Column/Row 6
+      if($("#16").attr("name") == color && $("#26").attr("name") == color && $("#36").attr("name") == color && $("#46").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#56").attr("name") == color && $("#26").attr("name") == color && $("#36").attr("name") == color && $("#46").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#56").attr("name") == color && $("#66").attr("name") == color && $("#36").attr("name") == color && $("#46").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#56").attr("name") == color && $("#66").attr("name") == color && $("#76").attr("name") == color && $("#46").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#61").attr("name") == color && $("#62").attr("name") == color && $("#63").attr("name") == color && $("#64").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#62").attr("name") == color && $("#63").attr("name") == color && $("#64").attr("name") == color && $("#65").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#63").attr("name") == color && $("#64").attr("name") == color && $("#65").attr("name") == color && $("#66").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      //Column 7
+      if($("#71").attr("name") == color && $("#72").attr("name") == color && $("#73").attr("name") == color && $("#74").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#72").attr("name") == color && $("#73").attr("name") == color && $("#74").attr("name") == color && $("#75").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+      if($("#73").attr("name") == color && $("#74").attr("name") == color && $("#75").attr("name") == color && $("#76").attr("name") == color){
+         alert(color.capitalize() + " player wins!");
+      }
+   };
 });
