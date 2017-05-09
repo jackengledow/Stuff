@@ -96,9 +96,9 @@ $(document).ready( function(){
          }
       }
       clickCount++;
-      check();
+      check(id);
    });
-   var check = function(){
+   /*var check = function(){
       var color = $("#" + id).attr('name');
       // Column/Row One
       if($("#11").attr("name") == color && $("#21").attr("name") == color && $("#31").attr("name") == color && $("#41").attr("name") == color){
@@ -242,5 +242,11 @@ $(document).ready( function(){
       if($("#73").attr("name") == color && $("#74").attr("name") == color && $("#75").attr("name") == color && $("#76").attr("name") == color){
          alert(color.capitalize() + " player wins!");
       }
+   };*/
+   var check = function(a){
+	   var color = $("#" + a).attr("name");
+	   //var columnNumber = a.substring(0, 1);
+	   var place = a.split("");
+	   console.log(place);
    };
 });
