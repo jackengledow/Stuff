@@ -117,10 +117,9 @@
 			var enterOne = function(){
 				$("#guess").val("");
 				onePlayer = true;
-				var randomSelector = Math.floor(Math.random() * 10);
+				var randomSelector = Math.floor(Math.random() * onePlayerArray.length);
 				var randomWord = onePlayerArray[randomSelector];
 				random = randomWord.split("");
-				console.log(random);
 				for(g = 0; g < random.length; g++){
 					trueFalse.push(false);
 				}
@@ -162,7 +161,7 @@
 					$('<span>' + word[i] + '</span>').appendTo("." + word[i] + "" + i).addClass("span" + word[i]);
 				}
 			}
-			var trueFalserino = function(op){
+			var checkTrue = function(op){
 				if (op == true){
 					return true;
 				}
@@ -190,7 +189,7 @@
 				else{
 					young = true;
 				}
-				if (young == true){				
+				if (young == true){
 					for(o = 0; o < arr.length; o++){
 						if (arr[o] == guess){
 							trueFalse[o] = true;
@@ -221,7 +220,7 @@
 					   }
 					});
 				}
-				var q = trueFalse.every(trueFalserino);
+				var q = trueFalse.every(checkTrue);
 				if (q == true){
 					$("#hiddenWord").html("<p>You won in " + numOfGuesses + " guesses!!</p><br><a href='hangman.html' id = 'button'><button>Play Again?</button></a>");
 					$(".disappear").css("display", "none");

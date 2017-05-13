@@ -1,6 +1,7 @@
 table {
 	width: 700px;
 	height: 600px;
+	background-color: purple;
 }
 td {
 	border: 2px solid black;
