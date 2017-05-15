@@ -247,6 +247,21 @@ $(document).ready( function(){
 	   var color = $("#" + a).attr("name");
 	   //var columnNumber = a.substring(0, 1);
 	   var place = a.split("");
-	   console.log(place);
+	   console.log(place[0] + 1);
+	   if($("#" + (place[0]-1 + place[1]).toString()).attr('name') == color){
+	      if($("#" + (place[0]-2 + place[1]).toString()).attr('name') == color){
+	         if($("#" + (place[0]-3 + place[1]).toString()).attr('name') == color){
+	            console.log("triple right");
+	         }
+	      }
+	   }
+	   if($("#" + (place[0]+1 + place[1]).toString()).attr('name') == color){
+	      console.log("yaboy");
+	      if($("#" + (place[0]-1 + place[1]).toString()).attr('name') == color){
+	         if($("#" + (place[0]-2 + place[1]).toString()).attr('name') == color){
+	            console.log("triple righterooni");
+	         }
+	      }
+	   }
    };
 });
