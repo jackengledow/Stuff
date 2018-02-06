@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PapaParse Practice</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src = "PapaParse-4.3.2/papaparse.js"></script>
+		<style>
+			table{
+				border: 2px solid black;
+				border-collapse: collapse;
+			}
+			td{
+				border: 2px solid black;
+				border-collapse: collapse;
+				text-align: center;
+				padding: 12px;
+			}
+			.yellow{
+				background-color: yellow;
+			}
+			.red{
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Practice</h2>
+		<script>
+			var newData;
+
+			function handleFileSelect(evt) {
+			var file = evt.target.files[0];
+
+				Papa.parse(file, {
+					dynamicTyping: true,
+					complete: function(results) {
+						var data = results;
+						newData = data;
+						doEverything(newData);
+					}	
+				});
+			}
+			
+			function parseName(name){
+				for(i = 1; i<name.length; i++){
+					if(name[i] === name[i].toUpperCase()){
+						return name.substring(0, i) + " " + name.substring(i, name.length);
+					}
+				}
+			}
+			function sumRow(b){
+				var sum = 0;
+				for(x = 1; x<b.length; x++){
+					console.log(b[x]);
+					sum += b[x];
+				}
+				return sum;
+			}
+			function generateRows(a){
+				for(i = 1; i < a.data.length-1; i++){
+					$("table").append("<tr id = " + i + "></tr>");
+				}
+			}
+			function doEverything(a){
+				console.log(a);
+				$("table").append("<tr id = 'dates'></tr>");
+				for(i = 0; i < a.data[0].length; i++){
+					$("#dates").append("<th>" + a.data[0][i] + "</th>");
+				}
+				$("#dates").append("<th>%</th>");
+				generateRows(a);
+				for(x = 1; x<a.data.length-1; x++){
+					singlePerson(a.data[x], x);
+				}
+			}
+			function percentHere(arr, a){
+				var timeHere = sumRow(arr);
+				var totalTime = 190*(arr.length-1);
+				var percentTime = Math.round(100*(timeHere/totalTime));
+				$("#" + a).append("<td>" + percentTime + "</td>");
+			}
+			function singlePerson(arr, a){
+				$("#" + a).append("<td>" + parseName(arr[0]) + "</td>");
+				for(i = 1; i<arr.length; i++){
+					switch(arr[i]){
+						case 95:
+							$("#" + a).append("<td class = 'yellow'>" + arr[i] + "</td>");
+							break;
+						case 0:
+							$("#" + a).append("<td class = 'red'>" + arr[i] + "</td>");
+							break;
+						default:
+							$("#" + a).append("<td>" + arr[i] + "</td>");
+					}
+				}
+				///percentHere(arr, a);
+			}
+			$(document).ready(function(){
+				$("#csv-file").change(handleFileSelect);
+			});
+		</script>
+		<input type="file" id="csv-file" name="files"/>
+		<table>
+		</table>
+	</body>
+</html>
