@@ -9,6 +9,9 @@
 				border: 2px solid black;
 				border-collapse: collapse;
 			}
+			body{
+				font-family: "Arial", sans-seriff;
+			}
 			td{
 				border: 2px solid black;
 				border-collapse: collapse;
@@ -21,27 +24,29 @@
 			.red{
 				background-color: red;
 			}
-			.green{
-				background-color: green;
-			}
 			.largeTd{
 				width: 75px;
 			}
 			.white{
-		    background-color: white !important;
+				background-color: white !important;
+			}
+			.name{
+				width: 100px;
 			}
 		</style>
 	</head>
 	<body>
 		<h2>Practice</h2>
 		<script>
+			//60% threshold: 1976
+			//80% threshold: 988
 			var newData;
 			var length;
 			
-			function handleFileSelect() {
-				//var file = evt.target.files[0];
+			function handleFileSelect(evt) {
+				var file = evt.target.files[0];
 
-				Papa.parse("http://www.techhounds.com/attendanceVisual.csv", {
+				Papa.parse(file, {
 					download: true,
 					dynamicTyping: true,
 					complete: function(results) {
@@ -59,13 +64,13 @@
 				}
 			}
 			function parseDate(){
-				var date = Date().substring(4, 10);
+				/*var date = Date().substring(4, 10);
 				if(date.substring(0,1) == "J"){
 					return "1/"+date.substring(4,6);
 				} else {
 					return "2/" + date.substring(4,6);
-				}
-				console.log(date);
+				}*/
+				return "1/30";
 			}
 			function sumRow(b){
 				var sum = 0;
@@ -105,17 +110,18 @@
 			function percentHere(arr, a){
 				var timeHere = sumRow(arr);
 				var totalTime = 190*(length-1);
+				var timeAway = totalTime-timeHere;
 				var percentTime = Math.round(100*(timeHere/totalTime));
-				if(percentTime >= 60 && percentTime < 80){
+				if(timeAway>988 && timeAway<1976){
 					$("#" + a).append("<td class = 'yellow'>" + percentTime + "%</td>");
-				} else if(percentTime < 60){
+				} else if(timeAway >=1976){
 					$("#" + a).append("<td class = 'red'>" + percentTime + "%</td>");
 				} else {
 					$("#" + a).append("<td>" + percentTime + "%</td>");
 				}
 			}
 			function singlePerson(arr, a){
-				$("#" + a).append("<td>" + parseName(arr[0]) + "</td>");
+				$("#" + a).append("<td class = 'name'>" + parseName(arr[0]) + "</td>");
 				for(i = 1; i<length; i++){
 					switch(arr[i]){
 						case 95:
@@ -129,11 +135,11 @@
 					}
 				}
 				for(j = length; j<arr.length; j++){
-				  $("#" + a).append("<td class = 'white'>0</td>");
+				  $("#" + a).append("<td class = 'white'>N/A</td>");
 				}
 			}
 			$(document).ready(function(){
-				handleFileSelect();
+				$("#csv-file").change(handleFileSelect);
 			});
 		</script>
 		<input type="file" id="csv-file" name="files"/>
