@@ -21,15 +21,19 @@
 			.red{
 				background-color: red;
 			}
+			.largeTd{
+				width: 75px;
+			}
 		</style>
 	</head>
 	<body>
 		<h2>Practice</h2>
 		<script>
 			var newData;
-
+			var length;
+			
 			function handleFileSelect(evt) {
-			var file = evt.target.files[0];
+				var file = evt.target.files[0];
 
 				Papa.parse(file, {
 					dynamicTyping: true,
@@ -48,10 +52,18 @@
 					}
 				}
 			}
+			function parseDate(){
+				var date = Date().substring(4, 10);
+				if(date.substring(0,1) == "J"){
+					return "1/"+date.substring(4,6);
+				} else {
+					return "2/" + date.substring(4,6);
+				}
+				console.log(date);
+			}
 			function sumRow(b){
 				var sum = 0;
-				for(x = 1; x<b.length; x++){
-					console.log(b[x]);
+				for(x = 1; x<length; x++){
 					sum += b[x];
 				}
 				return sum;
@@ -65,23 +77,40 @@
 				console.log(a);
 				$("table").append("<tr id = 'dates'></tr>");
 				for(i = 0; i < a.data[0].length; i++){
-					$("#dates").append("<th>" + a.data[0][i] + "</th>");
+					if(i<1){
+						$("#dates").append("<th>" + a.data[0][i] + "</th>");
+					}
+					else{
+						$("#dates").append("<th class = 'largeTd'>" + a.data[0][i] + "</th>");
+						if(a.data[0][i] == 30){
+							length = i+1;
+						}
+					}
 				}
 				$("#dates").append("<th>%</th>");
 				generateRows(a);
 				for(x = 1; x<a.data.length-1; x++){
 					singlePerson(a.data[x], x);
 				}
+				for(f = 1; f<a.data.length-1; f++){
+					percentHere(a.data[f], f);
+				}
 			}
 			function percentHere(arr, a){
 				var timeHere = sumRow(arr);
-				var totalTime = 190*(arr.length-1);
+				var totalTime = 190*(length-1);
 				var percentTime = Math.round(100*(timeHere/totalTime));
-				$("#" + a).append("<td>" + percentTime + "</td>");
+				if(percentTime >= 60 && percentTime < 80){
+					$("#" + a).append("<td class = 'yellow'>" + percentTime + "%</td>");
+				} else if(percentTime < 60){
+					$("#" + a).append("<td class = 'red'>" + percentTime + "%</td>");
+				} else {
+					$("#" + a).append("<td>" + percentTime + "%</td>");
+				}
 			}
 			function singlePerson(arr, a){
 				$("#" + a).append("<td>" + parseName(arr[0]) + "</td>");
-				for(i = 1; i<arr.length; i++){
+				for(i = 1; i<length; i++){
 					switch(arr[i]){
 						case 95:
 							$("#" + a).append("<td class = 'yellow'>" + arr[i] + "</td>");
@@ -93,7 +122,6 @@
 							$("#" + a).append("<td>" + arr[i] + "</td>");
 					}
 				}
-				///percentHere(arr, a);
 			}
 			$(document).ready(function(){
 				$("#csv-file").change(handleFileSelect);
