@@ -24,6 +24,9 @@
 			.largeTd{
 				width: 75px;
 			}
+			.white{
+		    background-color: white !important;
+			}
 		</style>
 	</head>
 	<body>
@@ -32,7 +35,7 @@
 			var newData;
 			var length;
 			
-			function handleFileSelect(evt) {
+			/*function handleFileSelect(evt) {
 				var file = evt.target.files[0];
 
 				Papa.parse(file, {
@@ -41,10 +44,19 @@
 						var data = results;
 						newData = data;
 						doEverything(newData);
-					}	
+					}
 				});
+			}*/
+			function parse(){
+        console.log("this is running");
+  			$.get.parse("http://www.techhounds.com/2018-website/assets/spreadsheets/attendanceVisual.csv", {
+            complete: function(data) {
+                console.log("Done!");
+                newData = data;
+                doEverything(newData);
+            }
+        });
 			}
-			
 			function parseName(name){
 				for(i = 1; i<name.length; i++){
 					if(name[i] === name[i].toUpperCase()){
@@ -81,10 +93,12 @@
 						$("#dates").append("<th>" + a.data[0][i] + "</th>");
 					}
 					else{
-						$("#dates").append("<th class = 'largeTd'>" + a.data[0][i] + "</th>");
-						if(a.data[0][i] == 30){
+					  console.log(a.data[0][i]);
+					  console.log(parseDate());
+					  if(a.data[0][i] == parseDate()){
 							length = i+1;
 						}
+						$("#dates").append("<th class = 'largeTd'>" + a.data[0][i] + "</th>");
 					}
 				}
 				$("#dates").append("<th>%</th>");
@@ -113,21 +127,22 @@
 				for(i = 1; i<length; i++){
 					switch(arr[i]){
 						case 95:
-							$("#" + a).append("<td class = 'yellow'>" + arr[i] + "</td>");
+							$("#" + a).append("<td class = 'yellow'>Half</td>");
 							break;
 						case 0:
-							$("#" + a).append("<td class = 'red'>" + arr[i] + "</td>");
+							$("#" + a).append("<td class = 'red'>Miss</td>");
 							break;
 						default:
-							$("#" + a).append("<td>" + arr[i] + "</td>");
+							$("#" + a).append("<td>Full</td>");
 					}
 				}
+				for(j = length; j<arr.length; j++){
+				  $("#" + a).append("<td class = 'white'>0</td>");
+				}
 			}
-			$(document).ready(function(){
-				$("#csv-file").change(handleFileSelect);
-			});
 		</script>
-		<input type="file" id="csv-file" name="files"/>
+		<!--<input type="file" id="csv-file" name="files"/>-->
+		<button onclick = "parse">Get results</button>
 		<table>
 		</table>
 	</body>
