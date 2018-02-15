@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Palindrome checker</title>
+  </head>
+  <body>
+    <label>Palindrome?</label><input id = "word" type = "text">
+    <button onclick = "doStuff()">Check</button>
+    <div id = "result"></div>
+    <script>
+      function doStuff(){
+        var word = document.getElementById("word").value;
+        var inverted = invert(word);
+        if(inverted == word){
+          document.getElementById("result").innerHTML = "Yes it is";
+        } else {
+          document.getElementById("result").innerHTML = "Not this time";
+        }
+      }
+      function invert(a){
+        var inverted = "";
+        for(i = a.length; i>=0; i--){
+          inverted += a.charAt(i);
+        }
+        console.log(inverted);
+        return inverted;
+      }
+    </script>
+  </body>
+</html>

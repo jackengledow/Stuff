@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Palindrome checker</title>
+  </head>
+  <body>
+    <label>Palindrome?</label><input id = "word" type = "text">

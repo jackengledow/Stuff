@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Binary to Decimal</title>
+  </head>
+  <body>
+    <input type = "text" id = "binary" maxlength = 8>
+    <button onclick ="doStuff()">convert to decimal</button>
+    <div id = "result"></div>
+    <script>
+      function doStuff(){
+        var binary = document.getElementById("binary").value;
+        var length = binary.length;
+        console.log(binary + ", " + length);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FizzBuzz</title>
+  </head>
+  <body>
+    <div id = "result"></div>
+    <script>
+      function fizzbuzz(){
+        var string = "";
+        var num = "";
+        for(i = 1; i<101; i++){
+          if(i%3 == 0 && i%5 != 0 ){
+            num = "fizz";
+          } else if(i%5 == 0 && i%3 != 0){
+            num = "buzz";
+          } else if(i%5 == 0 && i%3 == 0){
+            num = "fizzbuzz"
+          } else {
+            num = i;
+          }
+          string = string + num + ", ";
+        }
+        document.getElementById("result").innerHTML = string;
+      }
+      fizzbuzz();
+    </script>
+  </body>
+</html>
