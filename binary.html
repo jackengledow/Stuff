@@ -1,43 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Binary to Decimal</title>
-  </head>
-  <body>
-    <input type = "number" id = "binary">
-    <button onclick ="doStuff()">convert to decimal</button>
-    <button onclick ="doStuff2()">convert to binary</button>
-    <div id = "result"></div>
-    <script>
-      var yeet;
+   <head>
+      <title>Binary to Decimal</title>
+   </head>
+   <body>
+      <input type = "number" id = "binary">
+      <button onclick ="doStuff()">convert to decimal</button>
+      <button onclick ="doStuff2()">convert to binary</button>
+      <div id = "result"></div>
+      <script>
+      var num = "";
+      var count = 0;
+      var newNum = 0;
+      var changeable = [];
       function doStuff(){
         var binary = document.getElementById("binary").value;
         binDec(binary);
       }
       function doStuff2(){
-        var decimal = document.getElementById("binary").value;
-        decBin(decimal);
+         var decimal = document.getElementById("binary").value;
+         for(i = 0; i <= brad(parseInt(decimal)); i++){
+            if(i==0){
+               num += "0";
+            } else {
+               num += "0";
+            }
+         }
+         changeable = num.split("");
+         decBin(decimal);
       }
       function decBin(a){
-        var num = "";
-        var newNum = 0;
-        brad(a);
-        for(i = 0; i<=yeet; i++){
-          if(i == 0){
-            num += "1";
-          } else {
-            newNum = a-Math.pow(2, yeet);
-            while(yeet>=0){
-              brad(newNum);
+         b = parseInt(a);
+         if(b > 0){
+            brad(b);
+            for(i = 0; i<=brad(b); i++){
+               if(i == 0){
+                  changeable[(changeable.length -brad(b))] = "1";
+               } else {
+                  changeable[(changeable.length -brad(b))] = "0";
+               }
+               console.log(changeable);
             }
-          }
-        }
-        console.log(num);
+            newNum = newNumber(b);
+            count++;
+            decBin(newNum);
+         }
+      }
+      function newNumber(a){
+         var sugar = a-Math.pow(2, brad(a));
+         return sugar;
       }
       function brad(a){
         for(power = 0; Math.pow(2, power) <= parseInt(a); power++){
-          yeet = power;
+            var yeet = power;
         }
+        return yeet;
       }
       function binDec(a){
         var num = 0;
