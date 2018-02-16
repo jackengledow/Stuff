@@ -4,11 +4,12 @@
     <title>Binary to Decimal</title>
   </head>
   <body>
-    <input type = "text" id = "binary">
+    <input type = "number" id = "binary">
     <button onclick ="doStuff()">convert to decimal</button>
     <button onclick ="doStuff2()">convert to binary</button>
     <div id = "result"></div>
     <script>
+      var yeet;
       function doStuff(){
         var binary = document.getElementById("binary").value;
         binDec(binary);
@@ -18,8 +19,24 @@
         decBin(decimal);
       }
       function decBin(a){
-        for(i = 0; i<a.length; i++){
-          
+        var num = "";
+        var newNum = 0;
+        brad(a);
+        for(i = 0; i<=yeet; i++){
+          if(i == 0){
+            num += "1";
+          } else {
+            newNum = a-Math.pow(2, yeet);
+            while(yeet>=0){
+              brad(newNum);
+            }
+          }
+        }
+        console.log(num);
+      }
+      function brad(a){
+        for(power = 0; Math.pow(2, power) <= parseInt(a); power++){
+          yeet = power;
         }
       }
       function binDec(a){
