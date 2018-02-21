@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>coin flip</title>
+      <style>
+         p{
+            display: inline-block;
+            width: 40%;
+         }
+      </style>
+   </head>
+   <body>
+      <input type = "number" id = "number" placeholder = "number of flips">
+      <input type = "number" id = "num" placeholder = "number of simulations">
+      <button onclick = "flippitydooda()">Simulate</button>
+      <div>
+         <p id = "heads"></p>
+         <p id = "tails"></p>
+      </div>
+      <script>
+         var sum = 0;
+         var perHeads;
+         function getNumber(){
+            return document.getElementById("number").value;
+         }
+         function getSims(){
+            return document.getElementById("num").value;
+         }
+         function simulate(a){
+            var heads = 0;
+            var tails = 0;
+            for(i = 0; i < a; i++){
+               var random = Math.random();
+               if(random <= 0.5){
+                  heads++;
+               } else {
+                  tails++;
+               }
+            }
+            sum+=(heads/a);
+            console.log(heads + "/" + a);
+            console.log(sum);
+         }
+         function repeat(a){
+            for(i = 0; i<a; i++){
+               console.log(i);
+               simulate(getNumber());
+            }
+            perHeads = sum/a;
+         }
+         function flippitydooda(){
+            repeat(getSims());
+            document.getElementById("heads").innerHTML = "Avg% Heads: " + hundredths(perHeads);
+            document.getElementById("tails").innerHTML = "Avg% tails: " + hundredths(1-perHeads);
+         }
+         function hundredths(a){
+            var num = 100*a;
+            return Math.round(num)/100;
+         }
+      </script>
+   </body>
+</html>

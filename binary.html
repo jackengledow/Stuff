@@ -20,13 +20,8 @@
       function doStuff2(){
          var decimal = document.getElementById("binary").value;
          for(i = 0; i <= brad(parseInt(decimal)); i++){
-            if(i==0){
-               num += "0";
-            } else {
-               num += "0";
-            }
+            changeable.push("0");
          }
-         changeable = num.split("");
          decBin(decimal);
       }
       function decBin(a){
@@ -35,15 +30,16 @@
             brad(b);
             for(i = 0; i<=brad(b); i++){
                if(i == 0){
-                  changeable[(changeable.length -brad(b))] = "1";
+                  changeable[changeable.length -brad(b)-1] = "1";
                } else {
-                  changeable[(changeable.length -brad(b))] = "0";
+                  changeable[changeable.length -brad(b)] = "0";
                }
-               console.log(changeable);
             }
             newNum = newNumber(b);
             count++;
             decBin(newNum);
+         } else {
+            document.getElementById("result").innerHTML = changeable.join("");
          }
       }
       function newNumber(a){
