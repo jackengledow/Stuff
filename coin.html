@@ -29,6 +29,7 @@
          function simulate(a){
             var heads = 0;
             var tails = 0;
+            a = parseInt(a);
             for(i = 0; i < a; i++){
                var random = Math.random();
                if(random <= 0.5){
@@ -37,24 +38,24 @@
                   tails++;
                }
             }
-            sum+=(heads/a);
-            console.log(heads + "/" + a);
-            console.log(sum);
+            sum += heads/a;
          }
          function repeat(a){
-            for(i = 0; i<a; i++){
-               console.log(i);
-               simulate(getNumber());
+           a = parseInt(a);
+           var i = 0;
+            while(i<a){
+              simulate(getNumber());
+              i++;
             }
             perHeads = sum/a;
          }
          function flippitydooda(){
             repeat(getSims());
-            document.getElementById("heads").innerHTML = "Avg% Heads: " + hundredths(perHeads);
-            document.getElementById("tails").innerHTML = "Avg% tails: " + hundredths(1-perHeads);
+            document.getElementById("heads").innerHTML = "Avg% Heads: " + hundredths(perHeads) + "%";
+            document.getElementById("tails").innerHTML = "Avg% tails: " + hundredths(1-perHeads) + "%";
          }
          function hundredths(a){
-            var num = 100*a;
+            var num = 10000*a;
             return Math.round(num)/100;
          }
       </script>
